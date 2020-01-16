@@ -1,0 +1,19 @@
+.content {
+    margin-top: 10px;
+    background-color: lightgray;
+    margin-bottom: 10px;
+    padding: 20px;
+    width: 100%;
+}
+
+#password {
+    width: 100%;
+}
+
+.settings {
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #fffffc;
+}
+
+
