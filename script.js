@@ -11,8 +11,8 @@ const clipboardEl = document.getElementById('clipboard');
 
 //Putting each function generated below into object called randomFunc
 const randomFunc = {
-  lower:getRandomLower,
   upper:getRandomUpper,
+  lower:getRandomLower,
   numeric:getRandomNumeric,
   specialChar:getRandomSpecialChar
 };
@@ -20,18 +20,42 @@ const randomFunc = {
 //Adding an eventlistener to generateEl to listen for a click and when that happens, go ahead and run an arrow function
 // Get the values of each element length, uppercase, lowercase, specialChar, numeric
 //create the variables for these elements
-generateEl.addEventListener('click', ()=> { 
-  const length = lengthEl.value;
-  const hasLower = lowercaseEl.checked;
+generateEl.addEventListener('click', () => { 
+  const length = +lengthEl.value;
   const hasUpper = uppercaseEl.checked;
+  const hasLower = lowercaseEl.checked;
   const hasSpecialChar = specialCharEl.checked;
   const hasNumeric = numericEl.checked;
+  // console.log(length, hasUpper, hasLower, hasSpecialChar, hasNumeric);
   
   //pass these values into function called generatePassword and the result of which will be put into password element
-  passwordEl.innerText = generatePassword(hasLower, hasUpper, hasSpecialChar, hasNumeric, length);
+passwordEl.innerText = generatePassword(hasUpper, hasLower, hasSpecialChar, hasNumeric, length);
 });
+// copy password to the clipboard
+
+clipboardEl.addEventListener('click', () => {
+
+  var copyText = document.getElementById("password");
+
+  /* Select the text field */
+  //console.log(copyText.select())
+  copyText.select();
+
+  //document.getElementById("password").select()
+  // console.log(x);
+  copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+  // console.log(copyText.setSelectionRange(0, 99999));
+
+  // /* Copy the text inside the text field */
+  document.execCommand("copy");
+
+  // /* Alert the copied text */
+   //alert("Copied the text: " + copyText.value);
+ 
+});
+
 //Function to generate actual random password using the values above
-function generatePassword(lower, upper, numeric, specialChar, length) {
+function generatePassword(upper, lower, specialChar, numeric, length) {
   //Initialise the password variable
   //Check which character types are checked and filter out unchecked character types
   //loop over the length selected and run password generator function for each type that is checked
@@ -39,13 +63,29 @@ function generatePassword(lower, upper, numeric, specialChar, length) {
 
   let generatedPassword ='';
 
-  const typesCount = lower + upper + numeric + specialChar;
-  console.log('typesCount '+ typesCount);
+  const typesCount =  upper + lower + specialChar + numeric ;
+  // console.log('typesCount ', typesCount);
+  const typesArr = [{upper}, {lower}, {specialChar}, {numeric}]. filter 
+  ( 
+    item => Object.values(item) [0]
+    );
+  // console.log('typesArr ', typesArr);
   if (typesCount===0) {
     return '';
   }
-
+  for (let i=0; i<length; i+=typesCount) {
+    typesArr.forEach(type => {
+      const funcName = Object.keys(type)[0];
+      // console.log('funcName:', funcName);
+      generatedPassword += randomFunc[funcName]();
+    });
+  }
+  // console.log(generatedPassword);
+  const finalPassword = generatedPassword.slice(0,length);
+return finalPassword; 
 }
+
+
 
 
 //Generate functions for uppercase, lowercase, numeric and special characters
