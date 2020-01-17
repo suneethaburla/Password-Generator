@@ -20,8 +20,8 @@ const randomFunc = {
 //Adding an eventlistener to generateEl to listen for a click and when that happens, go ahead and run an arrow function
 // Get the values of each element length, uppercase, lowercase, specialChar, numeric
 //create the variables for these elements
-generateEl.addEventListener("click", () => { 
-  const length = +lengthEl.value;
+generateEl.addEventListener('click', ()=> { 
+  const length = lengthEl.value;
   const hasLower = lowercaseEl.checked;
   const hasUpper = uppercaseEl.checked;
   const hasSpecialChar = specialCharEl.checked;
@@ -32,11 +32,23 @@ generateEl.addEventListener("click", () => {
 });
 //Function to generate actual random password using the values above
 function generatePassword(lower, upper, numeric, specialChar, length) {
+  //Initialise the password variable
+  //Check which character types are checked and filter out unchecked character types
+  //loop over the length selected and run password generator function for each type that is checked
+  //Append the resulting variable to password variable and return the final password
+
+  let generatedPassword ='';
+
+  const typesCount = lower + upper + numeric + specialChar;
+  console.log('typesCount '+ typesCount);
+  if (typesCount===0) {
+    return '';
+  }
 
 }
 
 
-//Generate functions
+//Generate functions for uppercase, lowercase, numeric and special characters
 
 function getRandomUpper() {
   return String.fromCharCode(Math.floor(Math.random()*26)+65);
@@ -52,25 +64,3 @@ function getRandomSpecialChar() {
   return specialChars[Math.floor(Math.random()*specialChars.length)];
 }
 
-// var generateBtn = document.querySelector("#generate");
-
-
-// // Write password to the #password input
-// function writePassword() {
-//   var password = generatePassword();
-//   var passwordText = document.querySelector("#password");
-
-//   passwordText.value = password;
-
-//   copyBtn.removeAttribute("disabled");
-//   copyBtn.focus();
-// }
-
-// function copyToClipboard() {
-//   // BONUS 
-// }
-
-// // Add event listener to generate button
-// generateBtn.addEventListener("click", writePassword);
-
-// // BONUS EVENT LISTENER
