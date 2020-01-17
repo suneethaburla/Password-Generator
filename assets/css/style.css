@@ -1,9 +1,20 @@
+body {
+    background-image: url("../images/password.jpg");
+    background-size: 150%;
+    font-family: 'Fjalla One', sans-serif;
+    
+}
 .content {
     margin-top: 10px;
-    background-color: lightgray;
     margin-bottom: 10px;
     padding: 20px;
     width: 100%;
+    color:white;
+}
+.navbar-brand {
+    font-family: 'Fruktur', cursive;
+    font-size: 48px;
+    text-shadow: 2px 2px 8px white;
 }
 
 #password {
@@ -13,7 +24,7 @@
 .settings {
     padding: 10px;
     margin-top: 10px;
-    background-color: #fffffc;
+    
 }
 
 
